@@ -1,8 +1,16 @@
+"""
+El presente código resuelve laberintos utilizando el algoritmo A*.
+"""
 from queue import PriorityQueue
 from time import sleep
 from os import system
 
-SPEED = 100
+# Importamos las librerías necesarias para el algoritmo A* y la visualización en consola
+
+
+SPEED = 100 # Se establece la velocidad a la que se imprimirá el proceso de búsqueda.
+
+# Leemos el archivo del laberinto y copiamos su contenido a una variable para luego imprimir la solución
 
 maze = 'maze_big.txt'  # Descomentar el seleccionado
 with open(maze, 'r') as f:
@@ -12,7 +20,28 @@ clear_maze = laberinto.copy()
 
 
 class A_Star:
-    def __init__(self, laberinto):
+    """
+    Esta clase implementa el algoritmo de búsqueda A* para encontrar el camino más corto en un laberinto desde la entrada hasta la salida, evitando obstáculos.
+
+    Atributos:
+        abierto (PriorityQueue): Cola de prioridad que contiene los estados abiertos (por explorar).
+        cerrado (list): Lista que contiene los estados cerrados (explorados).
+        todos (dict): Diccionario que mapea cada estado con su estado predecesor.
+        laberinto (list): Representación del laberinto como una lista de strings.
+        operadores (list): Lista de operadores para generar estados vecinos.
+        operaciones (dict): Diccionario que mapea los operadores con sus respectivos desplazamientos en el laberinto.
+        estado_inicial (tuple): Coordenadas de la entrada del laberinto.
+        estado_actual (tuple): Coordenadas del estado actual en el algoritmo A*.
+        estado_final (tuple): Coordenadas de la salida del laberinto.
+
+    Métodos:
+        obtener_indices(char): Retorna las coordenadas del caracter especificado en el laberinto.
+        calcular_prioridad(estado, coste): Calcula la prioridad de un estado basado en la distancia de Manhattan y el coste acumulado.
+        abrir_estado(coste): Genera estados vecinos y los agrega a la cola de prioridad.
+        comprobar_estado(): Verifica si el estado actual es el estado final, y si no lo es, actualiza el estado actual.
+        imprime_laberinto(): Imprime el laberinto en la consola.
+    """
+    def __init__(self, laberinto): # Constructor de la clase A_Star
         self.abierto = PriorityQueue()
         self.cerrado = []
         self.todos = {}
@@ -35,16 +64,19 @@ class A_Star:
         self.abrir_estado(0)
 
     def obtener_indices(self, char):
+        # Función para obtener las coordenadas del caracter especificado (entrada o salida)
         for idx, row in enumerate(self.laberinto):
             if char in row:
                 return self.laberinto[idx].index(char), idx
         return '$', '$'
 
     def calcular_prioridad(self, estado, coste):
+        # Función para calcular la prioridad (coste + distancia de Manhattan) de un estado
         h_manhattan = abs(self.estado_final[0] - estado[0]) + abs(self.estado_final[1] - estado[1])
         return h_manhattan + coste
 
     def abrir_estado(self, coste):
+        # Función para generar estados vecinos y agregarlos a la cola de prioridad
         for operador in self.operadores:
             x, y = self.operaciones[operador]
             nuevo_estado = (self.estado_actual[0] + x, self.estado_actual[1] + y)
@@ -56,6 +88,7 @@ class A_Star:
                 pass
 
     def comprobar_estado(self):
+        # Función para comprobar si el estado actual es el estado final
         if not self.abierto.empty():
             estado = self.abierto.get()
         else:
