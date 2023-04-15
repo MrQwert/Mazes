@@ -1,11 +1,11 @@
 """
-El presente código resuelve laberintos utilizando el algoritmo A*.
+El presente código resuelve laberintos utilizando el algoritmo Coste Mínimo.
 """
 from queue import PriorityQueue
 from time import sleep
 from os import system
 
-# Importamos las librerías necesarias para el algoritmo A* y la visualización en consola
+# Importamos las librerías necesarias para el algoritmo de Coste Mínimo y la visualización en consola
 
 
 SPEED = 100 # Se establece la velocidad a la que se imprimirá el proceso de búsqueda.
@@ -19,9 +19,10 @@ with open(maze, 'r') as f:
 clear_maze = laberinto.copy()
 
 
-class A_Star:
+class Coste_Min:
     """
-    Esta clase implementa el algoritmo de búsqueda A* para encontrar el camino más corto en un laberinto desde la entrada hasta la salida, evitando obstáculos.
+    Esta clase implementa el algoritmo de búsqueda de Coste Mínimo para
+    encontrar el camino más corto en un laberinto desde la entrada hasta la salida, evitando obstáculos.
 
     Atributos:
         abierto (PriorityQueue): Cola de prioridad que contiene los estados abiertos (por explorar).
@@ -30,13 +31,14 @@ class A_Star:
         laberinto (list): Representación del laberinto como una lista de strings.
         operadores (list): Lista de operadores para generar estados vecinos.
         operaciones (dict): Diccionario que mapea los operadores con sus respectivos desplazamientos en el laberinto.
+        costes (dict): Diccionario que mapea los operadores con sus respectivos costes.
         estado_inicial (tuple): Coordenadas de la entrada del laberinto.
-        estado_actual (tuple): Coordenadas del estado actual en el algoritmo A*.
+        estado_actual (tuple): Coordenadas del estado actual en el algoritmo de Coste Mínimo.
         estado_final (tuple): Coordenadas de la salida del laberinto.
 
     Métodos:
         obtener_indices(char): Retorna las coordenadas del caracter especificado en el laberinto.
-        calcular_prioridad(estado, coste): Calcula la prioridad de un estado basado en la distancia de Manhattan y el coste acumulado.
+        calcular_prioridad(estado, coste): Calcula la prioridad de un estado basado en el coste acumulado.
         abrir_estado(coste): Genera estados vecinos y los agrega a la cola de prioridad.
         comprobar_estado(): Verifica si el estado actual es el estado final, y si no lo es, actualiza el estado actual.
         imprime_laberinto(): Imprime el laberinto en la consola.
@@ -52,6 +54,12 @@ class A_Star:
             'abajo': (0, 1),
             'izquierda': (-1, 0),
             'derecha': (1, 0)
+        }
+        self.costes = {
+            'arriba': 3,
+            'abajo': 2,
+            'izquierda': 4,
+            'derecha': 1
         }
 
         self.estado_inicial = self.obtener_indices('e')
@@ -70,20 +78,20 @@ class A_Star:
                 return self.laberinto[idx].index(char), idx
         return '$', '$'
 
-    def calcular_prioridad(self, estado, coste):
-        # Función para calcular la prioridad (coste + distancia de Manhattan) de un estado
-        h_manhattan = abs(self.estado_final[0] - estado[0]) + abs(self.estado_final[1] - estado[1])
-        return h_manhattan + coste
+    def calcular_prioridad(self, coste):
+        # Función para calcular la prioridad (coste) de un estado
+        return coste
 
     def abrir_estado(self, coste):
         # Función para generar estados vecinos y agregarlos a la cola de prioridad
         for operador in self.operadores:
             x, y = self.operaciones[operador]
             nuevo_estado = (self.estado_actual[0] + x, self.estado_actual[1] + y)
+            nuevo_coste = coste + self.costes[operador]
             try:
                 if self.laberinto[nuevo_estado[1]][nuevo_estado[0]] != '+' and nuevo_estado not in self.abierto.queue and nuevo_estado not in self.cerrado:
                     # En la cola de prioridad se almacena el estado y el coste para llegar al mismo.
-                    self.abierto.put((self.calcular_prioridad(nuevo_estado, coste + 1), nuevo_estado, coste + 1))
+                    self.abierto.put((self.calcular_prioridad(nuevo_coste), nuevo_estado, nuevo_coste))
                     self.todos[nuevo_estado] = self.estado_actual
             except Exception as e:
                 pass
@@ -104,7 +112,8 @@ class A_Star:
             return True
 
         if self.estado_actual != self.estado_inicial:
-            self.laberinto[estado[1][1]] = self.laberinto[estado[1][1]][:estado[1][0]] + '#' + self.laberinto[estado[1][1]][estado[1][0] + 1:]
+            self.laberinto[estado[1][1]] = self.laberinto[estado[1][1]][:estado[1][0]] \
+                                           + '#' + self.laberinto[estado[1][1]][estado[1][0] + 1:]
 
         return False
 
@@ -118,7 +127,7 @@ def print_laberinto(l):
         print(row)
 
 
-sol = A_Star(laberinto)
+sol = Coste_Min(laberinto)
 
 while sol.estado_actual != sol.estado_final:
     if sol.comprobar_estado():

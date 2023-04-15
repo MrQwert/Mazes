@@ -21,12 +21,12 @@ clear_maze = laberinto.copy()
 
 # Se define la clase 'Anchura' para implementar el algoritmo de búsqueda en anchura
 class Anchura:
-    """"
+    """
     Esta clase contiene varios atributos y métodos:
 
     - Atributos: almacenar información como el laberinto, los estados abiertos, cerrados, iniciales, actuales y finales, y las operaciones posibles.
     - Métodos: para inicializar el objeto, obtener índices de caracteres específicos, abrir un estado, comprobar el estado actual, e imprimir el laberinto.
-    """"
+    """
     abierto = []
     cerrado = []
     estados = []
@@ -85,7 +85,7 @@ class Anchura:
         Esta función se utiliza para comprobar si se ha alcanzado el estado final (la salida del laberinto) y actualizar el estado actual. La función devuelve True si se alcanza el estado final y False en caso contrario.
         """
         try:
-            estado = self.abierto.pop(0) # Se intenta obtener el siguiente estado de la lista de estados abiertos
+            estado = self.abierto.pop(0) # Se intenta obtener el siguiente estado de la lista de estados abiertos (FIFO)
         except: # Si no hay más estados abiertos, se considera que el laberinto no tiene solución y se termina la ejecución del programa.
             print('¡El laberinto introducido no tiene solución!')
             exit()
