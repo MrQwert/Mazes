@@ -8,10 +8,10 @@ from os import system
 # Importamos las librerías necesarias para el algoritmo A* y la visualización en consola
 
 
-SPEED = 100 # Se establece la velocidad a la que se imprimirá el proceso de búsqueda.
+SPEED = 100  # Se establece la velocidad a la que se imprimirá el proceso de búsqueda.
+CON_COSTES = True  # Se establece si al algoritmo implementado trabajará con coste uniforme o no.
 
 # Leemos el archivo del laberinto y copiamos su contenido a una variable para luego imprimir la solución
-
 maze = 'maze_big.txt'  # Descomentar el seleccionado
 with open(maze, 'r') as f:
     laberinto = f.read().split('\n')
@@ -30,6 +30,7 @@ class A_Star:
         laberinto (list): Representación del laberinto como una lista de strings.
         operadores (list): Lista de operadores para generar estados vecinos.
         operaciones (dict): Diccionario que mapea los operadores con sus respectivos desplazamientos en el laberinto.
+        costes (dict): Diccionario que mapea los operadores con sus respectivos costes.
         estado_inicial (tuple): Coordenadas de la entrada del laberinto.
         estado_actual (tuple): Coordenadas del estado actual en el algoritmo A*.
         estado_final (tuple): Coordenadas de la salida del laberinto.
@@ -41,7 +42,8 @@ class A_Star:
         comprobar_estado(): Verifica si el estado actual es el estado final, y si no lo es, actualiza el estado actual.
         imprime_laberinto(): Imprime el laberinto en la consola.
     """
-    def __init__(self, laberinto): # Constructor de la clase Coste_Min
+
+    def __init__(self, laberinto):  # Constructor de la clase Avara
         self.abierto = PriorityQueue()
         self.cerrado = []
         self.todos = {}
@@ -52,6 +54,12 @@ class A_Star:
             'abajo': (0, 1),
             'izquierda': (-1, 0),
             'derecha': (1, 0)
+        }
+        self.costes = {
+            'arriba': 3,
+            'abajo': 2,
+            'izquierda': 4,
+            'derecha': 1
         }
 
         self.estado_inicial = self.obtener_indices('e')
@@ -80,10 +88,15 @@ class A_Star:
         for operador in self.operadores:
             x, y = self.operaciones[operador]
             nuevo_estado = (self.estado_actual[0] + x, self.estado_actual[1] + y)
+            if CON_COSTES:
+                nuevo_coste = coste + self.costes[operador]
+            else:
+                nuevo_coste = coste + 1
             try:
-                if self.laberinto[nuevo_estado[1]][nuevo_estado[0]] != '+' and nuevo_estado not in self.abierto.queue and nuevo_estado not in self.cerrado:
+                if self.laberinto[nuevo_estado[1]][nuevo_estado[
+                    0]] != '+' and nuevo_estado not in self.abierto.queue and nuevo_estado not in self.cerrado:
                     # En la cola de prioridad se almacena el estado y el coste para llegar al mismo.
-                    self.abierto.put((self.calcular_prioridad(nuevo_estado, coste + 1), nuevo_estado, coste + 1))
+                    self.abierto.put((self.calcular_prioridad(nuevo_estado, nuevo_coste), nuevo_estado, nuevo_coste))
                     self.todos[nuevo_estado] = self.estado_actual
             except Exception as e:
                 pass
@@ -104,7 +117,9 @@ class A_Star:
             return True
 
         if self.estado_actual != self.estado_inicial:
-            self.laberinto[estado[1][1]] = self.laberinto[estado[1][1]][:estado[1][0]] + '#' + self.laberinto[estado[1][1]][estado[1][0] + 1:]
+            self.laberinto[estado[1][1]] = self.laberinto[estado[1][1]][:estado[1][0]] + '#' + self.laberinto[
+                                                                                                   estado[1][1]][
+                                                                                               estado[1][0] + 1:]
 
         return False
 
@@ -127,7 +142,6 @@ while sol.estado_actual != sol.estado_final:
     sol.imprime_laberinto()
     sleep(1 / SPEED)
     system('clear')
-
 
 state = sol.estado_final
 while state != sol.estado_inicial:

@@ -43,7 +43,7 @@ class Coste_Min:
         comprobar_estado(): Verifica si el estado actual es el estado final, y si no lo es, actualiza el estado actual.
         imprime_laberinto(): Imprime el laberinto en la consola.
     """
-    def __init__(self, laberinto): # Constructor de la clase Coste_Min
+    def __init__(self, laberinto): # Constructor de la clase Avara
         self.abierto = PriorityQueue()
         self.cerrado = []
         self.todos = {}

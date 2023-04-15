@@ -9,9 +9,9 @@ from os import system
 
 
 SPEED = 100 # Se establece la velocidad a la que se imprimirá el proceso de búsqueda.
+CON_COSTES = True  # Se establece si al algoritmo implementado trabajará con coste uniforme o no.
 
 # Leemos el archivo del laberinto y copiamos su contenido a una variable para luego imprimir la solución
-
 maze = 'maze_big.txt'  # Descomentar el seleccionado
 with open(maze, 'r') as f:
     laberinto = f.read().split('\n')
@@ -19,7 +19,7 @@ with open(maze, 'r') as f:
 clear_maze = laberinto.copy()
 
 
-class Coste_Min:
+class Avara:
     """
     Esta clase implementa el algoritmo de búsqueda Avara para encontrar el camino
     más corto en un laberinto desde la entrada hasta la salida, evitando obstáculos.
@@ -43,7 +43,7 @@ class Coste_Min:
         comprobar_estado(): Verifica si el estado actual es el estado final, y si no lo es, actualiza el estado actual.
         imprime_laberinto(): Imprime el laberinto en la consola.
     """
-    def __init__(self, laberinto): # Constructor de la clase Coste_Min
+    def __init__(self, laberinto): # Constructor de la clase Avara
         self.abierto = PriorityQueue()
         self.cerrado = []
         self.todos = {}
@@ -88,7 +88,10 @@ class Coste_Min:
         for operador in self.operadores:
             x, y = self.operaciones[operador]
             nuevo_estado = (self.estado_actual[0] + x, self.estado_actual[1] + y)
-            nuevo_coste = coste + self.costes[operador]
+            if CON_COSTES:
+                nuevo_coste = coste + self.costes[operador]
+            else:
+                nuevo_coste = coste + 1
             try:
                 if self.laberinto[nuevo_estado[1]][nuevo_estado[0]] != '+' and nuevo_estado not in self.abierto.queue and nuevo_estado not in self.cerrado:
                     # En la cola de prioridad se almacena el estado y el coste para llegar al mismo.
@@ -128,7 +131,7 @@ def print_laberinto(l):
         print(row)
 
 
-sol = Coste_Min(laberinto)
+sol = Avara(laberinto)
 
 while sol.estado_actual != sol.estado_final:
     if sol.comprobar_estado():

@@ -5,11 +5,13 @@ Este repositorio contiene implementaciones en Python de los algoritmos de búsqu
 ## Algoritmos implementados
 - Búsqueda en anchura
 - Búsqueda en profundidad
-- A*
+- Coste Mínimo
+- Avara (con costes)
+- A* (con costes)
+- Minimax
 
 ## TO DO
 
 - Refactorizar código
-- Añadir Minmax
 - Añadir visualizaciones
 - Documentar (memoria).
