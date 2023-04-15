@@ -1,13 +1,17 @@
 # Algoritmos de búsqueda con laberintos
 
-Este repositorio contiene implementaciones en Python de los algoritmos de búsqueda en anchura, en profundidad y A* para solucionar laberintos. Estos algoritmos son muy utilizados en la inteligencia artificial y la robótica para encontrar rutas óptimas en entornos complejos.
+Este repositorio contiene implementaciones en Python de 
+los algoritmos de búsqueda en anchura, en profundidad, de coste mínimo,
+avaro, A* y minimax para solucionar laberintos. Estos algoritmos 
+son muy utilizados en la Inteligencia Artificial y la robótica 
+para encontrar rutas óptimas en entornos complejos.
 
 ## Algoritmos implementados
 - Búsqueda en anchura
 - Búsqueda en profundidad
 - Coste Mínimo
-- Avara (con costes)
-- A* (con costes)
+- Avara (con/sin costes)
+- A* (con/sin costes)
 - Minimax
 
 ## TO DO
