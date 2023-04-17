@@ -15,14 +15,7 @@ class Anchura:
     - Atributos: almacenar información como el laberinto, los estados abiertos, cerrados, iniciales, actuales y finales, y las operaciones posibles.
     - Métodos: para inicializar el objeto, obtener índices de caracteres específicos, abrir un estado, comprobar el estado actual, e imprimir el laberinto.
     """
-    abierto = []
-    cerrado = []
-    estados = []
-    todos = {}
-    laberinto = None
-    estado_inicial  = ((None,None),(None,None))
-    estado_actual   = ((None,None),(None,None))
-    estado_final    = ((None,None),(None,None))
+    
     operadores = ['arriba','abajo','izquierda','derecha']
     operaciones = { # Se codifican las operaciones
             'arriba'    : (0,-1),
@@ -32,6 +25,13 @@ class Anchura:
         }
     
     def __init__(self,laberinto) -> None: # Constructor de la clase.
+        self.abierto = []#
+        self.cerrado = []#
+        self.estados = []#
+        self.todos = {}#
+        self.estado_inicial  = ((None,None),(None,None))#
+        self.estado_actual   = ((None,None),(None,None))#
+        self.estado_final    = ((None,None),(None,None))#
         self.laberinto = laberinto
         
         self.estado_inicial = self.obtener_indices('e') # Obtenemos la posición de la entrada al laberinto.
