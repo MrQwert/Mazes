@@ -6,6 +6,7 @@ from time import sleep
 from os import system
 import tkinter as tk 
 from tkinter import messagebox
+import sys
 
 # Se define la clase 'Anchura' para implementar el algoritmo de búsqueda en anchura
 class Anchura:
@@ -16,6 +17,8 @@ class Anchura:
     - Métodos: para inicializar el objeto, obtener índices de caracteres específicos, abrir un estado, comprobar el estado actual, e imprimir el laberinto.
     """
     
+    
+
     operadores = ['arriba','abajo','izquierda','derecha']
     operaciones = { # Se codifican las operaciones
             'arriba'    : (0,-1),
@@ -83,104 +86,12 @@ class Anchura:
         if self.estado_actual[0] == self.estado_final[0]: # Se comprueba si el estado actual es igual al estado final
             return True
         if self.estado_actual[0] != self.estado_inicial[0]: # Si el estado actual no es el estado final ni el estado inicial, se actualiza el laberinto con el símbolo '#' para marcar la posición actual
+            print("\n HE PUESTO UNA NUEVA MARCA #")
             self.laberinto[estado[0][1]] = self.laberinto[estado[0][1]][:estado[0][0]]+'#'+self.laberinto[estado[0][1]][estado[0][0]+1:]
         return False
         
         
-    def imprime_laberinto(self, ventana, celdas): # Función para imprimir el laberinto resuelto por el algoritmo
-        #for row in self.laberinto:
-        #    print(row)
-        actualizar_pantalla(self.laberinto, ventana, celdas)
-
-def crear_ventana_laberinto(laberinto):
-    ventana = tk.Tk()
-    ventana.title("Laberinto")
-
-    ventana.eval('tk::PlaceWindow . center')
-
-    celdas = []
-
-    for i, fila in enumerate(laberinto):
-        fila_celdas = []
-        for j, celda in enumerate(fila):
-            lbl_celda = tk.Label(ventana, width=2, height=1, bg='white', relief=tk.SUNKEN, borderwidth=1)
-            lbl_celda.grid(row=i, column=j)
-            fila_celdas.append(lbl_celda)
-        celdas.append(fila_celdas)
-
-    return ventana, celdas
-
-
-def print_laberinto(l): # Función para imprimir el laberinto de la solución final
-        for row in l:
-            print(row)
-
-def actualizar_pantalla(laberinto, ventana, celdas):
-    for i, fila in enumerate(laberinto):
-        for j, celda in enumerate(fila):
-            if celda == '+':
-                celdas[i][j].config(bg='black')
-            elif celda == ' ':
-                celdas[i][j].config(bg='white')
-            elif celda == 'e':
-                celdas[i][j].config(bg='green')
-            elif celda == 's':
-                celdas[i][j].config(bg='red')
-            elif celda == '#':
-                celdas[i][j].config(bg='blue')
-            elif celda == '@':
-                celdas[i][j].config(bg='yellow')
-    ventana.update()
-
-
-def resolver_mapa_anchura(speed, mapa):
-    SPEED = speed
-    #SPEED = 950 # Se establece la velocidad a la que se imprimirá el proceso de búsqueda.
-
-    # Se selecciona el fichero de texto que contiene el laberinto.
-    maze = mapa # Descomentar el seleccionado
-    #maze = 'maze_small.txt' # Descomentar el seleccionado
-    #maze =  'maze_big.txt'   # Descomentar el seleccionado
-    #maze = 'maze_simple.txt' # Descomentar el seleccionado
-
-    # Se lee el fichero seleccionado y se almacena en la variable laberinto.
-    with open(maze,'r') as f:
-        laberinto = f.read().split('\n')
-
-    # Se crea una copia que luego utilizaremos para mostrar la solución.
-    clear_maze = laberinto.copy()
-
-
-
-    ventana, celdas = crear_ventana_laberinto(laberinto)
-
-    sol = Anchura(laberinto) # Se instancia la clase Anchura indicando el laberinto
-
-    while sol.estado_actual != sol.estado_final: # Se ejecuta el algoritmo hasta encontrar la salida
-        
-        if sol.comprobar_estado() == -1:
-            messagebox.showinfo(message="El laberinto no tiene solución", title="Titulo")
-            ventana.destroy()
-            return
-
-        if sol.comprobar_estado():
-            sol.imprime_laberinto(ventana,celdas)
-            break
-        sol.imprime_laberinto(ventana, celdas)
-        ventana.after(1000 // SPEED)
-
-
-    system('clear')
-    state = sol.estado_final[0]
-
-    while state != sol.estado_inicial[0]: # Se imprime la solución final paso a paso, marcando los movimientos realizados con el símbolo '@'
-        state = sol.todos[state]
-        clear_maze[state[1]] = clear_maze[state[1]][:state[0]]+'@'+clear_maze[state[1]][state[0]+1:]
-        actualizar_pantalla(clear_maze, ventana, celdas)
-        ventana.after(1000 // SPEED)
-        if state != sol.estado_inicial[0]:
-            system('clear')
-
-    messagebox.showinfo(message="Haga click para continuar", title="Titulo")
-    ventana.destroy()
-    return
+    # def imprime_laberinto(self, ventana, celdas): # Función para imprimir el laberinto resuelto por el algoritmo
+    #     #for row in self.laberinto:
+    #     #    print(row)
+    #     actualizar_pantalla(self.laberinto, ventana, celdas)
