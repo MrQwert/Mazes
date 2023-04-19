@@ -35,7 +35,7 @@ while (True):
     print("velocidad_impresion = "+str(dic_seleccion_velocidad[velocidad_impresion])+"\n")
 
     ## Se lee el fichero seleccionado y se almacena en la variable laberinto.
-    with open(dic_seleccion_laberinto[tipo_laberinto],'r') as f:
+    with open("Laberintos/"+dic_seleccion_laberinto[tipo_laberinto],'r') as f:
         laberinto = f.read().split('\n')
 
     ## Seleccionamos el algoritmo que haya indicado el usuario

@@ -56,6 +56,10 @@ def crear_ventana_laberinto(laberinto):
 ## Función para actualizar la ventana del laberinto, pintando cada celda de su color correspondiente 
 def actualizar_pantalla(laberinto, ventana, celdas, color,i,j):
 
-    celdas[i][j].config(bg=color)
-    ventana.update()
+    try:
+        celdas[i][j].config(bg=color)
+        ventana.update()
+    except:
+        print("\nEl usuario ha cerrado la ventana durante la impresion, cerrando programa...")
+        sys.exit()
 
