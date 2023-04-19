@@ -73,7 +73,9 @@ def crear_home():
 	radio_algoritmo = tk.Radiobutton(ventana, text="Anchura",font=("Arial", 14), value=1, variable=algoritmo_seleccionado).grid(row = 2, column = 1,sticky = "W", padx = padding_x_radio)
 	radio_algoritmo = tk.Radiobutton(ventana, text="Profundidad",font=("Arial", 14), value=2, variable=algoritmo_seleccionado).grid(row = 3, column = 1,sticky = "W", padx = padding_x_radio)
 	radio_algoritmo = tk.Radiobutton(ventana, text="A*",font=("Arial", 14), value=3, variable=algoritmo_seleccionado).grid(row = 4, column = 1,sticky = "W", padx = padding_x_radio)
-	radio_algoritmo = tk.Radiobutton(ventana, text="MinMax",font=("Arial", 14), value=4, variable=algoritmo_seleccionado).grid(row = 5, column = 1,sticky = "W", padx = padding_x_radio)
+	radio_algoritmo = tk.Radiobutton(ventana, text="Avara",font=("Arial", 14), value=4, variable=algoritmo_seleccionado).grid(row = 5, column = 1,sticky = "W", padx = padding_x_radio)
+	radio_algoritmo = tk.Radiobutton(ventana, text="Coste mínimo",font=("Arial", 14), value=5, variable=algoritmo_seleccionado).grid(row = 6, column = 1,sticky = "W", padx = padding_x_radio)
+	radio_algoritmo = tk.Radiobutton(ventana, text="MinMax",font=("Arial", 14), value=6, variable=algoritmo_seleccionado).grid(row = 7, column = 1,sticky = "W", padx = padding_x_radio)
 
 	# Variable que almacena la opcion seleccionada por el radiobutton de la heurística, así como las opciones del mismo y su posición en el grid
 	heuristica_seleccionada = tk.IntVar()
@@ -91,17 +93,17 @@ def crear_home():
 	# Creamos un botón, importante pasar la función a ejecutar en "command" sin paréntesis. Ejemplo: "command = funcion"
 	# Si queremos pasar argumentos a la función hay que usar lambda. Ejemplo: "command = lambda: funcion(argumentos)"
 	botonEjecutar = tk.Button(ventana, width = 15, height = 3, text = "Ejecutar búsqueda",font=("Arial", 14), command = lambda: opcionesSeleccionadas(ventana,etiqueta_error,laberinto_seleccionado,heuristica_seleccionada,algoritmo_seleccionado,velocidad_seleccionada))
-	botonEjecutar.grid(row = 6, column = 1, columnspan = 2, padx = 25, pady= 80)
+	botonEjecutar.grid(row = 8, column = 1, columnspan = 2, padx = 25, pady= 60)
 
 	# Creamos un botón, importante pasar la función a ejecutar en "command" sin paréntesis
 	# Si queremos pasar parámetros hay que usar lambda --> "command = lambda: funcion(argumentos)"
 	botonSalir = tk.Button(ventana, width = 15, height = 3, text = "Cerrar programa",font=("Arial", 14), command = lambda: cerrarPrograma(ventana))
-	botonSalir.grid(row = 7, column = 1, columnspan = 2, padx = 25, pady= 0)
+	botonSalir.grid(row = 9, column = 1, columnspan = 2, padx = 25, pady= 0)
 
 
 	# Creamos una etiqueta de error por si el usuario trata de ejecutar sin haber seleccionado todas las opciones
 	etiqueta_error = tk.Label(ventana,font=("Arial", 14),fg='#FF0000')
-	etiqueta_error.grid(row = 8, column = 1, columnspan = 2,padx = 25, pady= 20)
+	etiqueta_error.grid(row = 10, column = 1, columnspan = 2,padx = 25, pady= 20)
 
 	ventana.mainloop()
 

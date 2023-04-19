@@ -1,6 +1,6 @@
 ## ---------------------------------------------------------------------------------------------------------------------
 ## ---------------------------------------------------------------------------------------------------------------------
-## ARCHIVO "A_STAR.PY" CONTIENE LA CLASE Y MÉTODOS NECESARIOS PARA RESOLVER UN LABERINTO USANDO BÚSQUEDA A ESTRELLA
+## ARCHIVO "AVARA.PY" CONTIENE LA CLASE Y MÉTODOS NECESARIOS PARA RESOLVER UN LABERINTO USANDO BÚSQUEDA AVARA
 ## ---------------------------------------------------------------------------------------------------------------------
 ## ---------------------------------------------------------------------------------------------------------------------
 
@@ -12,13 +12,13 @@ from tkinter import messagebox
 import sys
 from queue import PriorityQueue
 
-
 CON_COSTES = True  # Se establece si al algoritmo implementado trabajará con coste uniforme o no.
 
-# Se define la clase 'A_Star' para implementar el algoritmo de búsqueda A*
-class A_Star:
+# Se define la clase 'Avara' para implementar el algoritmo de búsqueda en avaro
+class Avara:
     """
-    Esta clase implementa el algoritmo de búsqueda A* para encontrar el camino más corto en un laberinto desde la entrada hasta la salida, evitando obstáculos.
+    Esta clase implementa el algoritmo de búsqueda Avara para encontrar el camino
+    más corto en un laberinto desde la entrada hasta la salida, evitando obstáculos.
 
     Atributos:
         abierto (PriorityQueue): Cola de prioridad que contiene los estados abiertos (por explorar).
@@ -29,18 +29,17 @@ class A_Star:
         operaciones (dict): Diccionario que mapea los operadores con sus respectivos desplazamientos en el laberinto.
         costes (dict): Diccionario que mapea los operadores con sus respectivos costes.
         estado_inicial (tuple): Coordenadas de la entrada del laberinto.
-        estado_actual (tuple): Coordenadas del estado actual en el algoritmo A*.
+        estado_actual (tuple): Coordenadas del estado actual en el algoritmo avaro.
         estado_final (tuple): Coordenadas de la salida del laberinto.
 
     Métodos:
         obtener_indices(char): Retorna las coordenadas del caracter especificado en el laberinto.
-        calcular_prioridad(estado, coste): Calcula la prioridad de un estado basado en la distancia de Manhattan y el coste acumulado.
+        calcular_prioridad(estado, coste): Calcula la prioridad de un estado basado en el coste acumulado.
         abrir_estado(coste): Genera estados vecinos y los agrega a la cola de prioridad.
         comprobar_estado(): Verifica si el estado actual es el estado final, y si no lo es, actualiza el estado actual.
         imprime_laberinto(): Imprime el laberinto en la consola.
     """
-
-    def __init__(self, laberinto):  # Constructor de la clase Avara
+    def __init__(self, laberinto): # Constructor de la clase Avara
         self.abierto = PriorityQueue()
         self.cerrado = []
         self.todos = {}
@@ -75,10 +74,10 @@ class A_Star:
                 return self.laberinto[idx].index(char), idx
         return '$', '$'
 
-    def calcular_prioridad(self, estado, coste):
-        # Función para calcular la prioridad (coste + distancia de Manhattan) de un estado
+    def calcular_prioridad(self, estado):
+        # Función para calcular la prioridad (distancia de Manhattan) de un estado
         h_manhattan = abs(self.estado_final[0] - estado[0]) + abs(self.estado_final[1] - estado[1])
-        return h_manhattan + coste
+        return h_manhattan
 
     def abrir_estado(self, coste):
         # Función para generar estados vecinos y agregarlos a la cola de prioridad
@@ -92,7 +91,7 @@ class A_Star:
             try:
                 if self.laberinto[nuevo_estado[1]][nuevo_estado[0]] != '+' and self.laberinto[nuevo_estado[1]][nuevo_estado[0]] != 'e' and nuevo_estado not in self.abierto.queue and nuevo_estado not in self.cerrado:
                     # En la cola de prioridad se almacena el estado y el coste para llegar al mismo.
-                    self.abierto.put((self.calcular_prioridad(nuevo_estado, nuevo_coste), nuevo_estado, nuevo_coste))
+                    self.abierto.put((self.calcular_prioridad(nuevo_estado), nuevo_estado, nuevo_coste))
                     self.todos[nuevo_estado] = self.estado_actual
             except Exception as e:
                 pass
@@ -116,4 +115,3 @@ class A_Star:
             self.laberinto[estado[1][1]] = self.laberinto[estado[1][1]][:estado[1][0]] + '#' + self.laberinto[estado[1][1]][estado[1][0] + 1:]
 
         return False
-
