@@ -66,7 +66,7 @@ class Anchura:
             x, y = self.operaciones[operador]
             nuevo_estado = (self.estado_actual[0][0] + x, self.estado_actual[0][1] + y) # Se calcula el nuevo estado sumando las coordenadas del estado actual con las coordenadas correspondientes al operador
             try:
-                if self.laberinto[nuevo_estado[1]][nuevo_estado[0]] != '+' and nuevo_estado not in self.estados and nuevo_estado not in self.cerrado: #  se verifica si el nuevo estado es accesible y válido, es decir, si no es una pared ('+') y si no está en las listas de estados ya visitados (estados y cerrados). Si se cumplen las condiciones, se agrega el nuevo estado a la lista de estados abiertos y se actualiza el diccionario todos.
+                if self.laberinto[nuevo_estado[1]][nuevo_estado[0]] != '+' and self.laberinto[nuevo_estado[1]][nuevo_estado[0]] != 'e' and nuevo_estado not in self.estados and nuevo_estado not in self.cerrado: #  se verifica si el nuevo estado es accesible y válido, es decir, si no es una pared ('+') y si no está en las listas de estados ya visitados (estados y cerrados). Si se cumplen las condiciones, se agrega el nuevo estado a la lista de estados abiertos y se actualiza el diccionario todos.
                         self.abierto.append((nuevo_estado,self.estado_actual[0]))
                         self.estados.append(nuevo_estado)
                         self.todos[nuevo_estado] = self.estado_actual[0]

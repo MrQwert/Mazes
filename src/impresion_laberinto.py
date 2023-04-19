@@ -91,8 +91,7 @@ def resolver_mapa_anchura(milisegundos, laberinto, sol):
         state = sol.todos[state]
         sleep(milisegundos/1000)
 
-    # Pinto la última casilla
-    actualizar_pantalla(laberinto, ventana, celdas,"yellow",state[1],state[0])
+
     messagebox.showinfo(message="Haga click para continuar", title="AVISO")
     ventana.destroy()
 
