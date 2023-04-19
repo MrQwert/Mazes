@@ -43,12 +43,12 @@ while (True):
     ## Seleccionamos el algoritmo que haya indicado el usuario
     ## (EN CONSTRUCCIÓN)
     if(dic_seleccion_algoritmo[algoritmo_busqueda] == "Anchura"):
-        sol = Anchura(laberinto) 
-    #elif(dic_seleccion_algoritmo[algoritmo_busqueda] == "Profundidad"):
-    #    sol = Profundidad(laberinto)
+        algoritmo = Anchura(laberinto) 
+    elif(dic_seleccion_algoritmo[algoritmo_busqueda] == "Profundidad"):
+        algoritmo = Profundidad(laberinto)
     else:
-        sol = Anchura(laberinto) 
+        algoritmo = Anchura(laberinto) 
 
     ## Resolvemos el laberinto
-    resolver_mapa_anchura(dic_seleccion_velocidad[velocidad_impresion], laberinto,sol)
-    del(sol)
+    resolver_mapa_algoritmo(dic_seleccion_velocidad[velocidad_impresion], laberinto,algoritmo)
+    del(algoritmo)
