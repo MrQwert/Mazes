@@ -21,7 +21,7 @@ dic_seleccion_algoritmo = dict({1:"Anchura",2:"Profundidad",3:"A*",4:"MinMax"})
 dic_seleccion_heuristica = dict({1:"Manhattan",2:"Euclidea",3:"Chebyshev"})
 
 ## Sigue el siguiente orden 1:vel_baja - 2:vel_media - 3:vel_alta, cuanto más grande el número, más velocidad de impresión
-dic_seleccion_velocidad = dict({1:30,2:150,3:500})
+dic_seleccion_velocidad = dict({1:350,2:50,3:10})
 
 ## Bucle principal del programa, mostrar al usuario la ventana "home", que escoja, imprimir visualmente
 ## su elección, y vuelta a empezar

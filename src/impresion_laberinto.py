@@ -61,8 +61,8 @@ def actualizar_pantalla(laberinto, ventana, celdas, color,i,j):
 
 
 ## Función para resolver el mapa con el algoritmo, velocidad y mapa que reciba
-def resolver_mapa_anchura(speed, laberinto, sol):
-    SPEED = speed
+def resolver_mapa_anchura(milisegundos, laberinto, sol):
+
 
     ventana, celdas = crear_ventana_laberinto(laberinto)
 
@@ -81,7 +81,7 @@ def resolver_mapa_anchura(speed, laberinto, sol):
 
         if resultado_comprobacion == True:
             break
-        ventana.after(1000 // SPEED)
+        sleep(milisegundos/1000)
 
 
     state = sol.estado_final[0]
@@ -89,7 +89,7 @@ def resolver_mapa_anchura(speed, laberinto, sol):
     while state != sol.estado_inicial[0]: # Se imprime la solución final paso a paso, marcando los movimientos realizados con el símbolo '@'
         actualizar_pantalla(laberinto, ventana, celdas,"yellow",state[1],state[0])
         state = sol.todos[state]
-        ventana.after(1000 // SPEED)
+        sleep(milisegundos/1000)
 
     # Pinto la última casilla
     actualizar_pantalla(laberinto, ventana, celdas,"yellow",state[1],state[0])
