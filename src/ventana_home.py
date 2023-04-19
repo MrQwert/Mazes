@@ -75,7 +75,7 @@ def crear_home():
 	radio_algoritmo = tk.Radiobutton(ventana, text="A*",font=("Arial", 14), value=3, variable=algoritmo_seleccionado).grid(row = 4, column = 1,sticky = "W", padx = padding_x_radio)
 	radio_algoritmo = tk.Radiobutton(ventana, text="Avara",font=("Arial", 14), value=4, variable=algoritmo_seleccionado).grid(row = 5, column = 1,sticky = "W", padx = padding_x_radio)
 	radio_algoritmo = tk.Radiobutton(ventana, text="Coste mínimo",font=("Arial", 14), value=5, variable=algoritmo_seleccionado).grid(row = 6, column = 1,sticky = "W", padx = padding_x_radio)
-	radio_algoritmo = tk.Radiobutton(ventana, text="MinMax",font=("Arial", 14), value=6, variable=algoritmo_seleccionado).grid(row = 7, column = 1,sticky = "W", padx = padding_x_radio)
+	radio_algoritmo = tk.Radiobutton(ventana, text="MINIMAX",font=("Arial", 14), value=6, variable=algoritmo_seleccionado).grid(row = 7, column = 1,sticky = "W", padx = padding_x_radio)
 
 	# Variable que almacena la opcion seleccionada por el radiobutton de la heurística, así como las opciones del mismo y su posición en el grid
 	heuristica_seleccionada = tk.IntVar()

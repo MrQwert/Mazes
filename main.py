@@ -8,6 +8,7 @@
 
 ## -----------------Librerías-------------------------
 import tkinter as tk
+import gc
 from src import *
 
 
@@ -66,3 +67,5 @@ while (True):
     ## Resolvemos el laberinto
     resolver_mapa_algoritmo(dic_seleccion_velocidad[velocidad_impresion], laberinto,algoritmo,tiene_tupla)
     del(algoritmo)
+
+    gc.collect()

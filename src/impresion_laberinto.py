@@ -112,6 +112,7 @@ def resolver_mapa_algoritmo(milisegundos, laberinto, algoritmo, tiene_tupla):
     
 
     messagebox.showinfo(message="Haga click para continuar", title="AVISO")
+
     ventana.destroy()
 
     return
