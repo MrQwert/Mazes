@@ -14,6 +14,7 @@ def crear_ventana_laberinto(laberinto):
 
     celdas = []
 
+    ## Recorremos todo el mapa pintando del color correspondiente cada celda
     for i, fila in enumerate(laberinto):
         fila_celdas = []
         for j, celda in enumerate(fila):
@@ -80,7 +81,7 @@ def resolver_mapa_anchura(speed, laberinto, sol):
         ventana.after(1000 // SPEED)
 
     # Pinto la última casilla
-    actualizar_pantalla_2(state,laberinto, ventana, celdas,"yellow")
+    actualizar_pantalla(laberinto, ventana, celdas,"yellow",state[1],state[0])
     messagebox.showinfo(message="Haga click para continuar", title="AVISO")
     ventana.destroy()
 
