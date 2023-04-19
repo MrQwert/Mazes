@@ -44,11 +44,16 @@ while (True):
     ## (EN CONSTRUCCIÓN)
     if(dic_seleccion_algoritmo[algoritmo_busqueda] == "Anchura"):
         algoritmo = Anchura(laberinto) 
+        tiene_tupla = True
     elif(dic_seleccion_algoritmo[algoritmo_busqueda] == "Profundidad"):
         algoritmo = Profundidad(laberinto)
+        tiene_tupla = True
+    elif(dic_seleccion_algoritmo[algoritmo_busqueda] == "A*"):
+        algoritmo = A_Star(laberinto)
+        tiene_tupla = False
     else:
         algoritmo = Anchura(laberinto) 
 
     ## Resolvemos el laberinto
-    resolver_mapa_algoritmo(dic_seleccion_velocidad[velocidad_impresion], laberinto,algoritmo)
+    resolver_mapa_algoritmo(dic_seleccion_velocidad[velocidad_impresion], laberinto,algoritmo,tiene_tupla)
     del(algoritmo)

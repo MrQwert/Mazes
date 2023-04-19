@@ -72,7 +72,7 @@ def actualizar_pantalla(laberinto, ventana, celdas, color,i,j):
 
 
 ## Función para resolver el mapa con el algoritmo, velocidad y mapa que reciba
-def resolver_mapa_algoritmo(milisegundos, laberinto, algoritmo):
+def resolver_mapa_algoritmo(milisegundos, laberinto, algoritmo, tiene_tupla):
 
 
     ventana, celdas = crear_ventana_laberinto(laberinto)
@@ -88,19 +88,28 @@ def resolver_mapa_algoritmo(milisegundos, laberinto, algoritmo):
             ventana.destroy()
             return
 
-        actualizar_pantalla(algoritmo.laberinto, ventana, celdas,"blue",algoritmo.estado_actual[0][1],algoritmo.estado_actual[0][0])
-
+        if(tiene_tupla == True):
+            actualizar_pantalla(algoritmo.laberinto, ventana, celdas,"blue",algoritmo.estado_actual[0][1],algoritmo.estado_actual[0][0])
+        else:
+            actualizar_pantalla(algoritmo.laberinto, ventana, celdas,"blue",algoritmo.estado_actual[1],algoritmo.estado_actual[0])
         if resultado_comprobacion == True:
             break
         sleep(milisegundos/1000)
 
 
-    state = algoritmo.estado_final[0]
-
-    while state != algoritmo.estado_inicial[0]: # Se imprime la solución final paso a paso, marcando los movimientos realizados con el símbolo '@'
-        actualizar_pantalla(laberinto, ventana, celdas,"yellow",state[1],state[0])
-        state = algoritmo.todos[state]
-        sleep(milisegundos/1000)
+    if(tiene_tupla == True):
+        state = algoritmo.estado_final[0]
+        while state != algoritmo.estado_inicial[0]: # Se imprime la solución final paso a paso, marcando los movimientos realizados con el símbolo '@'
+            actualizar_pantalla(laberinto, ventana, celdas,"yellow",state[1],state[0])
+            state = algoritmo.todos[state]
+            sleep(milisegundos/1000)
+    else:
+        state = algoritmo.estado_final
+        while state != algoritmo.estado_inicial: # Se imprime la solución final paso a paso, marcando los movimientos realizados con el símbolo '@'
+            actualizar_pantalla(laberinto, ventana, celdas,"yellow",state[1],state[0])
+            state = algoritmo.todos[state]
+            sleep(milisegundos/1000)
+    
 
 
     messagebox.showinfo(message="Haga click para continuar", title="AVISO")
