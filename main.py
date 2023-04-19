@@ -17,7 +17,7 @@ from src import *
 ## Diccionarios con las distintas opciones que puede devolver el usuario cuando la ventana "home" finaliza
 dic_seleccion_laberinto = dict({1:"maze_pequenio.txt",2:"maze_mediano.txt",3:"maze_grande.txt",4:"maze_custom.txt"})
 
-dic_seleccion_algoritmo = dict({1:"Anchura",2:"Profundidad",3:"A*",4:"Avara",5:"CosteMin",6:"MinMax"})
+dic_seleccion_algoritmo = dict({1:"Anchura",2:"Profundidad",3:"A*",4:"Avara",5:"CosteMin",6:"MiniMax"})
 
 dic_seleccion_heuristica = dict({1:"Manhattan",2:"Euclidea",3:"Chebyshev"})
 
@@ -42,7 +42,7 @@ while (True):
         laberinto = f.read().split('\n')
 
     ## Seleccionamos el algoritmo que haya indicado el usuario
-    ## (EN CONSTRUCCIÓN)
+    ## (FALTA MINIMAX)
     if(dic_seleccion_algoritmo[algoritmo_busqueda] == "Anchura"):
         algoritmo = Anchura(laberinto) 
         tiene_tupla = True
@@ -58,7 +58,7 @@ while (True):
     elif(dic_seleccion_algoritmo[algoritmo_busqueda] == "CosteMin"):
         algoritmo = Coste_Min(laberinto)
         tiene_tupla = False
-    elif(dic_seleccion_algoritmo[algoritmo_busqueda] == "MinMax"):
+    elif(dic_seleccion_algoritmo[algoritmo_busqueda] == "MiniMax"):
         algoritmo = A_Star(laberinto)
         tiene_tupla = False
     else:
@@ -66,6 +66,7 @@ while (True):
 
     ## Resolvemos el laberinto
     resolver_mapa_algoritmo(dic_seleccion_velocidad[velocidad_impresion], laberinto,algoritmo,tiene_tupla)
+    
+    ## Borrar de memoria restos
     del(algoritmo)
-
     gc.collect()
