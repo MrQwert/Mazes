@@ -15,6 +15,7 @@ dic_seleccion_velocidad = dict({1:30,2:150,3:500})
 ## Bucle principal del programa, mostrar al usuario la ventana "home", que escoja, imprimir visualmente
 ## su elección, y vuelta a empezar
 while (True):
+    print("\nINICIO BUCLE")
     tipo_laberinto, algoritmo_busqueda, tipo_heuristica, velocidad_impresion = crear_home()
 
     print("\nDatos recibidos de la ventana home:")
@@ -37,3 +38,6 @@ while (True):
 
     ## Resolvemos el laberinto
     resolver_mapa_anchura(dic_seleccion_velocidad[velocidad_impresion], laberinto,sol)
+    del(sol)
+
+    print("\nFIN BUCLE")

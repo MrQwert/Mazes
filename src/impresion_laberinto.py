@@ -42,68 +42,9 @@ def crear_ventana_laberinto(laberinto):
 
 
 ## Función para actualizar la ventana del laberinto, pintando cada celda de su color correspondiente 
-def actualizar_pantalla(estado_actual,laberinto, ventana, celdas, color):
+def actualizar_pantalla(laberinto, ventana, celdas, color,i,j):
 
-    # try:
-    #     i = estado_actual[0][1]
-    #     j = estado_actual[0][0]
-    #     celda = laberinto[i][j]
-    #     if celda == '+':
-    #         celdas[i][j].config(bg='black')
-    #     elif celda == ' ':
-    #         celdas[i][j].config(bg='white')
-    #     elif celda == 'e':
-    #         celdas[i][j].config(bg='green')
-    #     elif celda == 's':
-    #         celdas[i][j].config(bg='red')
-    #     elif celda == '#':
-    #         celdas[i][j].config(bg='blue')
-    #     elif celda == '@':
-    #         celdas[i][j].config(bg='yellow')
-    # except:
-    #     print("\nHan cerrado la ventana de impresión del laberinto y cerramos el programa...\n")
-    #     sys.exit()
-
-
-    i = estado_actual[0][1]
-    j = estado_actual[0][0]
-    print("\ni="+str(i)+" j="+str(j))
-    print(laberinto[i][j])
     celdas[i][j].config(bg=color)
-
-    ventana.update()
-
-
-## Función para actualizar la ventana del laberinto, pintando cada celda de su color correspondiente 
-def actualizar_pantalla_2(estado_actual,laberinto, ventana, celdas, color):
-
-    # try:
-    #     i = estado_actual[0][1]
-    #     j = estado_actual[0][0]
-    #     celda = laberinto[i][j]
-    #     if celda == '+':
-    #         celdas[i][j].config(bg='black')
-    #     elif celda == ' ':
-    #         celdas[i][j].config(bg='white')
-    #     elif celda == 'e':
-    #         celdas[i][j].config(bg='green')
-    #     elif celda == 's':
-    #         celdas[i][j].config(bg='red')
-    #     elif celda == '#':
-    #         celdas[i][j].config(bg='blue')
-    #     elif celda == '@':
-    #         celdas[i][j].config(bg='yellow')
-    # except:
-    #     print("\nHan cerrado la ventana de impresión del laberinto y cerramos el programa...\n")
-    #     sys.exit()
-
-
-    i = estado_actual[1]
-    j = estado_actual[0]
-    print("\ni="+str(i)+" j="+str(j))
-    print(laberinto[i][j])
-    celdas[i][j].config(bg=color)
-
     ventana.update()
 
 
@@ -111,18 +52,11 @@ def actualizar_pantalla_2(estado_actual,laberinto, ventana, celdas, color):
 def resolver_mapa_anchura(speed, laberinto, sol):
     SPEED = speed
 
-
-    # Se crea una copia que luego utilizaremos para mostrar la solución.
-    clear_maze = laberinto.copy()
-
     ventana, celdas = crear_ventana_laberinto(laberinto)
 
 
-    #sleep(100)
-
     while sol.estado_actual != sol.estado_final: # Se ejecuta el algoritmo hasta encontrar la salida
         
-        #sleep(1)
 
         resultado_comprobacion = sol.comprobar_estado()
 
@@ -131,36 +65,25 @@ def resolver_mapa_anchura(speed, laberinto, sol):
             ventana.destroy()
             return
 
-        actualizar_pantalla(sol.estado_actual,sol.laberinto, ventana, celdas,"blue")
+        actualizar_pantalla(sol.laberinto, ventana, celdas,"blue",sol.estado_actual[0][1],sol.estado_actual[0][0])
 
         if resultado_comprobacion == True:
             break
         ventana.after(1000 // SPEED)
 
 
-    system('clear')
     state = sol.estado_final[0]
 
     while state != sol.estado_inicial[0]: # Se imprime la solución final paso a paso, marcando los movimientos realizados con el símbolo '@'
+        actualizar_pantalla(laberinto, ventana, celdas,"yellow",state[1],state[0])
         state = sol.todos[state]
-        clear_maze[state[1]] = clear_maze[state[1]][:state[0]]+'@'+clear_maze[state[1]][state[0]+1:]
-        print("\nSTATE\n")
-        print(state)
-        #sleep(100)
-        actualizar_pantalla_2(state,clear_maze, ventana, celdas,"yellow")
         ventana.after(1000 // SPEED)
-        if state != sol.estado_inicial[0]:
-            system('clear')
 
-
+    # Pinto la última casilla
+    actualizar_pantalla_2(state,laberinto, ventana, celdas,"yellow")
     messagebox.showinfo(message="Haga click para continuar", title="AVISO")
     ventana.destroy()
 
+    print("\nFIN FUNCION IMPRESION LABERINTO")
+
     return
-
-
-
-# ## Función para imprimir el recorrido de la solución del laberinto
-# def print_laberinto(l):
-#         for row in l:
-#             print(row)
