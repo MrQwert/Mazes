@@ -55,7 +55,7 @@ while (True):
         algoritmo = Avara(laberinto)
         tiene_tupla = False
     elif(dic_seleccion_algoritmo[algoritmo_busqueda] == "CosteMin"):
-        algoritmo = A_Star(laberinto)
+        algoritmo = Coste_Min(laberinto)
         tiene_tupla = False
     elif(dic_seleccion_algoritmo[algoritmo_busqueda] == "MinMax"):
         algoritmo = A_Star(laberinto)

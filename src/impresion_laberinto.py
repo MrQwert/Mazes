@@ -111,7 +111,6 @@ def resolver_mapa_algoritmo(milisegundos, laberinto, algoritmo, tiene_tupla):
             sleep(milisegundos/1000)
     
 
-
     messagebox.showinfo(message="Haga click para continuar", title="AVISO")
     ventana.destroy()
 

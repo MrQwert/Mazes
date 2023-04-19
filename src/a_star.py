@@ -102,8 +102,8 @@ class A_Star:
         if not self.abierto.empty():
             estado = self.abierto.get()
         else:
-            print('¡El laberinto introducido no tiene solución!')
-            exit()
+            print('\n¡El laberinto introducido no tiene solución!')
+            return -1
 
         self.estado_actual = estado[1]
         self.abrir_estado(estado[2])

@@ -1,6 +1,6 @@
 ## ---------------------------------------------------------------------------------------------------------------------
 ## ---------------------------------------------------------------------------------------------------------------------
-## ARCHIVO "AVARA.PY" CONTIENE LA CLASE Y MÉTODOS NECESARIOS PARA RESOLVER UN LABERINTO USANDO BÚSQUEDA AVARA
+## ARCHIVO "COSTE_MIN.PY" CONTIENE LA CLASE Y MÉTODOS NECESARIOS PARA RESOLVER UN LABERINTO USANDO BÚSQUEDA COSTE MÍNIMO
 ## ---------------------------------------------------------------------------------------------------------------------
 ## ---------------------------------------------------------------------------------------------------------------------
 
@@ -12,13 +12,11 @@ from tkinter import messagebox
 import sys
 from queue import PriorityQueue
 
-CON_COSTES = True  # Se establece si al algoritmo implementado trabajará con coste uniforme o no.
-
-# Se define la clase 'Avara' para implementar el algoritmo de búsqueda en avaro
-class Avara:
+# Se define la clase 'COste_Min' para implementar el algoritmo de búsqueda coste mínimo
+class Coste_Min:
     """
-    Esta clase implementa el algoritmo de búsqueda Avara para encontrar el camino
-    más corto en un laberinto desde la entrada hasta la salida, evitando obstáculos.
+    Esta clase implementa el algoritmo de búsqueda de Coste Mínimo para
+    encontrar el camino más corto en un laberinto desde la entrada hasta la salida, evitando obstáculos.
 
     Atributos:
         abierto (PriorityQueue): Cola de prioridad que contiene los estados abiertos (por explorar).
@@ -29,7 +27,7 @@ class Avara:
         operaciones (dict): Diccionario que mapea los operadores con sus respectivos desplazamientos en el laberinto.
         costes (dict): Diccionario que mapea los operadores con sus respectivos costes.
         estado_inicial (tuple): Coordenadas de la entrada del laberinto.
-        estado_actual (tuple): Coordenadas del estado actual en el algoritmo avaro.
+        estado_actual (tuple): Coordenadas del estado actual en el algoritmo de Coste Mínimo.
         estado_final (tuple): Coordenadas de la salida del laberinto.
 
     Métodos:
@@ -74,24 +72,20 @@ class Avara:
                 return self.laberinto[idx].index(char), idx
         return '$', '$'
 
-    def calcular_prioridad(self, estado):
-        # Función para calcular la prioridad (distancia de Manhattan) de un estado
-        h_manhattan = abs(self.estado_final[0] - estado[0]) + abs(self.estado_final[1] - estado[1])
-        return h_manhattan
+    def calcular_prioridad(self, coste):
+        # Función para calcular la prioridad (coste) de un estado
+        return coste
 
     def abrir_estado(self, coste):
         # Función para generar estados vecinos y agregarlos a la cola de prioridad
         for operador in self.operadores:
             x, y = self.operaciones[operador]
             nuevo_estado = (self.estado_actual[0] + x, self.estado_actual[1] + y)
-            if CON_COSTES:
-                nuevo_coste = coste + self.costes[operador]
-            else:
-                nuevo_coste = coste + 1
+            nuevo_coste = coste + self.costes[operador]
             try:
                 if self.laberinto[nuevo_estado[1]][nuevo_estado[0]] != '+' and self.laberinto[nuevo_estado[1]][nuevo_estado[0]] != 'e' and nuevo_estado not in self.abierto.queue and nuevo_estado not in self.cerrado:
                     # En la cola de prioridad se almacena el estado y el coste para llegar al mismo.
-                    self.abierto.put((self.calcular_prioridad(nuevo_estado), nuevo_estado, nuevo_coste))
+                    self.abierto.put((self.calcular_prioridad(nuevo_coste), nuevo_estado, nuevo_coste))
                     self.todos[nuevo_estado] = self.estado_actual
             except Exception as e:
                 pass

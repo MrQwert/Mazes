@@ -77,7 +77,7 @@ class Profundidad:
         try:
             estado = self.abierto.pop(-1)  # Se intenta obtener el siguiente estado de la lista de estados abiertos (LIFO)
         except:  # Si no hay más estados abiertos, se considera que el laberinto no tiene solución y se termina la ejecución del programa.
-            print('¡El laberinto introducido no tiene solución!')
+            print('\n¡El laberinto introducido no tiene solución!')
             return -1
         self.estado_actual = estado  # Se actualiza el estado actual con el estado obtenido de la lista de estados abiertos
         self.abrir_estado()  # Se llama a la función abrir_estado() para expandir los nodos adyacentes al estado actual
