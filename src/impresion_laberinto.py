@@ -47,13 +47,14 @@ def crear_ventana_laberinto(laberinto):
             elif caracter == '@':
                 color='yellow'
             ## Creamos la celda y la posicionamos en el grid
-            lbl_celda = tk.Label(ventana, width=2, height=1, bg=color, relief=tk.SUNKEN, borderwidth=1).grid(row=i, column=j)
+            lbl_celda = tk.Label(ventana, width=2, height=1, bg=color, relief=tk.SUNKEN, borderwidth=1)
+            lbl_celda.grid(row=i, column=j)
             fila_celdas.append(lbl_celda)
         celdas.append(fila_celdas)
 
     ventana.update()
 
-    ## Controlamos que el usuario pueda cerrar la ventana
+    ## Controlar que el usuario cierre la ventana durante la impresión
     ventana.protocol("WM_DELETE_WINDOW", lambda: on_closing(ventana))
 
     return ventana, celdas
