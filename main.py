@@ -1,6 +1,17 @@
+## ---------------------------------------------------------------------------------------------------------------------
+## ---------------------------------------------------------------------------------------------------------------------
+## ARCHIVO "MAIN.PY" CONTIENE EL BUCLE PRINCIPAL DEL PROGRAMA, EL CUAL PERMITE AL USUARIO ESCOGER UNA SERIE DE OPCIONES,
+## Y DADA SU SELECCIÓN, IMPRIME DE FORMA VISUAL LA RESOLUCIÓN DEL LABERINTO
+## ---------------------------------------------------------------------------------------------------------------------
+## ---------------------------------------------------------------------------------------------------------------------
+
+
+## -----------------Librerías-------------------------
 import tkinter as tk
 from src import *
 
+
+## -----------------Comienza el programa-----------------
 
 ## Diccionarios con las distintas opciones que puede devolver el usuario cuando la ventana "home" finaliza
 dic_seleccion_laberinto = dict({1:"maze_pequenio.txt",2:"maze_mediano.txt",3:"maze_grande.txt",4:"maze_custom.txt"})
@@ -15,7 +26,6 @@ dic_seleccion_velocidad = dict({1:30,2:150,3:500})
 ## Bucle principal del programa, mostrar al usuario la ventana "home", que escoja, imprimir visualmente
 ## su elección, y vuelta a empezar
 while (True):
-    print("\nINICIO BUCLE")
     tipo_laberinto, algoritmo_busqueda, tipo_heuristica, velocidad_impresion = crear_home()
 
     print("\nDatos recibidos de la ventana home:")
@@ -39,5 +49,3 @@ while (True):
     ## Resolvemos el laberinto
     resolver_mapa_anchura(dic_seleccion_velocidad[velocidad_impresion], laberinto,sol)
     del(sol)
-
-    print("\nFIN BUCLE")

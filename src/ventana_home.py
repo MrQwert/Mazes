@@ -13,8 +13,6 @@ def crear_home():
 	# Creamos la ventana
 	ventana = tk.Tk()
 
-	print("\nCREANDO VENTANA NUEVA DE HOME")
-
 	ventana.title("UFV - INCO - Problema de búsqueda en laberintos - Grupo 4")
 
 	# Protocolo en caso de cierre de ventana
@@ -37,8 +35,6 @@ def crear_home():
 	 
 	# Indicamos las características de la ventana (anchura, altura y posición) 
 	ventana.geometry('%dx%d+%d+%d' % (anchura_ventana, altura_ventana, x, y))
-
-	print("\nGEOMETRIA DE HOME CREADA")
 
 	# Creamos la etiqueta del mensaje de información
 	etiqueta = tk.Label(ventana, text = "- Programa de resolución de laberintos -\nPor favor, selecciona entre "\
@@ -107,12 +103,6 @@ def crear_home():
 	etiqueta_error = tk.Label(ventana,font=("Arial", 14),fg='#FF0000')
 	etiqueta_error.grid(row = 8, column = 1, columnspan = 2,padx = 25, pady= 20)
 
-
-	print("\nUPDATE INICIADO DE HOME")
-	# Loop principal de nuestra ventana
-	ventana.update()
-
-	print("\nMAINLOOP INICIADO DE HOME")
 	ventana.mainloop()
 
 	# Cuando se presiona el botón de ejecutar, se cierra la ventana y devolvemos las selecciones del usuario

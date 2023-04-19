@@ -1,9 +1,20 @@
+## ---------------------------------------------------------------------------------------------------------------------
+## ---------------------------------------------------------------------------------------------------------------------
+## ARCHIVO "IMPRESION_LABERINTO.PY" CONTIENE LAS FUNCIONES NECESARIAS PARA MOSTRAR DE MANERA VISUAL, EN UNA VENTANA DE
+## TKINTER, LA BÚSQUEDA QUE REALIZA UN ALGORITMO EN UN LABERINTO
+## ---------------------------------------------------------------------------------------------------------------------
+## ---------------------------------------------------------------------------------------------------------------------
+
+## -----------------Librerías-------------------------
 import tkinter as tk
 from tkinter import messagebox
 from time import sleep
 from os import system
 import sys
 from src.funciones_auxiliares import *
+
+
+## -----------------Comienzan las funciones-----------------
 
 ## Función para crear la ventana de impresión del laberinto
 def crear_ventana_laberinto(laberinto):
@@ -84,7 +95,5 @@ def resolver_mapa_anchura(speed, laberinto, sol):
     actualizar_pantalla(laberinto, ventana, celdas,"yellow",state[1],state[0])
     messagebox.showinfo(message="Haga click para continuar", title="AVISO")
     ventana.destroy()
-
-    print("\nFIN FUNCION IMPRESION LABERINTO")
 
     return

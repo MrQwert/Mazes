@@ -1,7 +1,10 @@
-"""
-El presente código resuelve laberintos utilizando el algoritmo de búsqueda en anchura (Breadth-First Search o BFS).
-"""
-# Se importan las librerías necesarias
+## ---------------------------------------------------------------------------------------------------------------------
+## ---------------------------------------------------------------------------------------------------------------------
+## ARCHIVO "ANCHURA.PY" CONTIENE LA CLASE Y MÉTODOS NECESARIOS PARA RESOLVER UN LABERINTO USANDO BÚSQUEDA EN ANCHURA
+## ---------------------------------------------------------------------------------------------------------------------
+## ---------------------------------------------------------------------------------------------------------------------
+
+## -----------------Librerías-------------------------
 from time import sleep
 from os import system
 import tkinter as tk 
@@ -86,12 +89,6 @@ class Anchura:
         if self.estado_actual[0] == self.estado_final[0]: # Se comprueba si el estado actual es igual al estado final
             return True
         if self.estado_actual[0] != self.estado_inicial[0]: # Si el estado actual no es el estado final ni el estado inicial, se actualiza el laberinto con el símbolo '#' para marcar la posición actual
-            print("\n HE PUESTO UNA NUEVA MARCA #")
             self.laberinto[estado[0][1]] = self.laberinto[estado[0][1]][:estado[0][0]]+'#'+self.laberinto[estado[0][1]][estado[0][0]+1:]
         return False
-        
-        
-    # def imprime_laberinto(self, ventana, celdas): # Función para imprimir el laberinto resuelto por el algoritmo
-    #     #for row in self.laberinto:
-    #     #    print(row)
-    #     actualizar_pantalla(self.laberinto, ventana, celdas)
+

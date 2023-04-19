@@ -1,8 +1,18 @@
+## ---------------------------------------------------------------------------------------------------------------------
+## ---------------------------------------------------------------------------------------------------------------------
+## ARCHIVO "FUNCIONES_AUXILIARES.PY" CONTIENE FUNCIONES AUXILIARES QUE USAN LAS VENTANAS PRINCIPALES DE TKINTER
+## ---------------------------------------------------------------------------------------------------------------------
+## ---------------------------------------------------------------------------------------------------------------------
+
+
+
+## -----------------Librerías-------------------------
 import tkinter as tk
 from tkinter import messagebox
-from time import sleep
-from os import system
 import sys
+
+
+## -----------------Comienzan las funciones-----------------
 
 ## Función para el boton "Cerrar programa" de la ventana de home
 def cerrarPrograma(ventana):
