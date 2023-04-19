@@ -18,11 +18,15 @@ from src.funciones_auxiliares import *
 
 ## Función para crear la ventana de impresión del laberinto
 def crear_ventana_laberinto(laberinto):
+
+    ## Creamos la ventana
     ventana = tk.Tk()
     ventana.title("Laberinto")
 
+    ## La posicionamos centrada
     ventana.eval('tk::PlaceWindow . center')
 
+    ## Celdas de la ventana, cada una contendrá una posición del mapa, que se representará como un pequeño cuadrado
     celdas = []
 
     ## Recorremos todo el mapa pintando del color correspondiente cada celda
@@ -42,12 +46,14 @@ def crear_ventana_laberinto(laberinto):
                 color='blue'
             elif caracter == '@':
                 color='yellow'
-            lbl_celda = tk.Label(ventana, width=2, height=1, bg=color, relief=tk.SUNKEN, borderwidth=1)
-            lbl_celda.grid(row=i, column=j)
+            ## Creamos la celda y la posicionamos en el grid
+            lbl_celda = tk.Label(ventana, width=2, height=1, bg=color, relief=tk.SUNKEN, borderwidth=1).grid(row=i, column=j)
             fila_celdas.append(lbl_celda)
         celdas.append(fila_celdas)
 
     ventana.update()
+
+    ## Controlamos que el usuario pueda cerrar la ventana
     ventana.protocol("WM_DELETE_WINDOW", lambda: on_closing(ventana))
 
     return ventana, celdas

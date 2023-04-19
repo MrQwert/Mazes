@@ -20,7 +20,8 @@ dic_seleccion_algoritmo = dict({1:"Anchura",2:"Profundidad",3:"A*",4:"MinMax"})
 
 dic_seleccion_heuristica = dict({1:"Manhattan",2:"Euclidea",3:"Chebyshev"})
 
-## Sigue el siguiente orden 1:vel_baja - 2:vel_media - 3:vel_alta, cuanto más grande el número, más velocidad de impresión
+## Indica los milisegundos que el programa espera entre cada movimiento de búsqueda en el laberinto 
+## EJ: "1:350" --> La opción 1, la lenta, esperaría 350ms
 dic_seleccion_velocidad = dict({1:350,2:50,3:10})
 
 ## Bucle principal del programa, mostrar al usuario la ventana "home", que escoja, imprimir visualmente
@@ -28,6 +29,7 @@ dic_seleccion_velocidad = dict({1:350,2:50,3:10})
 while (True):
     tipo_laberinto, algoritmo_busqueda, tipo_heuristica, velocidad_impresion = crear_home()
 
+    ## Prints temporales para comprobar que hemos recogido correctamente las elecciones introducidas por el usuario
     print("\nDatos recibidos de la ventana home:")
     print("tipo_laberinto = "+dic_seleccion_laberinto[tipo_laberinto])
     print("algoritmo_busqueda = "+dic_seleccion_algoritmo[algoritmo_busqueda])
@@ -39,10 +41,11 @@ while (True):
         laberinto = f.read().split('\n')
 
     ## Seleccionamos el algoritmo que haya indicado el usuario
+    ## (EN CONSTRUCCIÓN)
     if(dic_seleccion_algoritmo[algoritmo_busqueda] == "Anchura"):
         sol = Anchura(laberinto) 
-    #elif(dic_seleccion_algoritmo[algoritmo_busqueda] == "Anchura"):
-    #    sol = Otro(laberinto)
+    #elif(dic_seleccion_algoritmo[algoritmo_busqueda] == "Profundidad"):
+    #    sol = Profundidad(laberinto)
     else:
         sol = Anchura(laberinto) 
 
