@@ -123,7 +123,7 @@ state = sol.estado_final[0]
 
 while state != sol.estado_inicial[0]: # Se imprime la solución final paso a paso, marcando los movimientos realizados con el símbolo '@'
     state = sol.todos[state]
-    clear_maze[state[1]] = clear_maze[state[1]][:state[0]]+'@'+clear_maze[state[1]][state[0]+1:]
+    clear_maze[state[1]] = clear_maze[state[1]][:state[0]]+'.'+clear_maze[state[1]][state[0]+1:]
     print_laberinto(clear_maze)
     sleep(1/SPEED)
     if state != sol.estado_inicial[0]:

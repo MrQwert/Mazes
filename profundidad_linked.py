@@ -38,10 +38,11 @@ class Profundidad:
     estado_final = ((None, None), (None, None))
     operadores = ['arriba', 'abajo', 'izquierda', 'derecha']
     operaciones = {  # Se codifican las operaciones
-        'arriba': (0, -1),
+        'derecha': (1, 0),
         'abajo': (0, 1),
         'izquierda': (-1, 0),
-        'derecha': (1, 0)
+        'arriba': (0, -1),
+
     }
 
     def __init__(self, laberinto) -> None:  # Constructor de la clase.

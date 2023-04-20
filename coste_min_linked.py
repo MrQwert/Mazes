@@ -12,7 +12,7 @@ SPEED = 100 # Se establece la velocidad a la que se imprimirá el proceso de bú
 
 # Leemos el archivo del laberinto y copiamos su contenido a una variable para luego imprimir la solución
 
-maze = 'maze_big.txt'  # Descomentar el seleccionado
+maze = 'maze_small.txt'  # Descomentar el seleccionado
 with open(maze, 'r') as f:
     laberinto = f.read().split('\n')
 

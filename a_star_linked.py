@@ -12,7 +12,7 @@ SPEED = 100  # Se establece la velocidad a la que se imprimirá el proceso de b�
 CON_COSTES = True  # Se establece si al algoritmo implementado trabajará con coste uniforme o no.
 
 # Leemos el archivo del laberinto y copiamos su contenido a una variable para luego imprimir la solución
-maze = 'maze_big.txt'  # Descomentar el seleccionado
+maze = 'maze_small.txt'  # Descomentar el seleccionado
 with open(maze, 'r') as f:
     laberinto = f.read().split('\n')
 
@@ -146,7 +146,7 @@ while sol.estado_actual != sol.estado_final:
 state = sol.estado_final
 while state != sol.estado_inicial:
     state = sol.todos[state]
-    clear_maze[state[1]] = clear_maze[state[1]][:state[0]] + '@' + clear_maze[state[1]][state[0] + 1:]
+    clear_maze[state[1]] = clear_maze[state[1]][:state[0]] + '.' + clear_maze[state[1]][state[0] + 1:]
     print_laberinto(clear_maze)
     sleep(1 / SPEED)
     if state != sol.estado_inicial:
