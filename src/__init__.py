@@ -5,4 +5,5 @@ from .profundidad import *
 from .a_star import *
 from .avara import *
 from .coste_min import *
+from .minimax import *
 from .impresion_laberinto import *
