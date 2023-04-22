@@ -14,8 +14,6 @@ para encontrar rutas óptimas en entornos complejos.
 - A* (con/sin costes)
 - Minimax
 
-## TO DO
+## Demo
 
-- Refactorizar código
-- Añadir visualizaciones
-- Documentar (memoria).
+En el [siguiente enlace](http://132.145.141.5:10081/vnc/noVNC-1.3.0/vnc.html?path=wsvnc?token=display10&autoconnect=true&resize=remote&bell=off&password=headless) se puede probar el software en un servidor virtual.
