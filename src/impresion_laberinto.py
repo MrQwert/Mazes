@@ -46,6 +46,8 @@ def crear_ventana_laberinto(laberinto):
                 color='blue'
             elif caracter == '@':
                 color='yellow'
+            elif caracter == 'X':
+                color='purple'
             ## Creamos la celda y la posicionamos en el grid
             lbl_celda = tk.Label(ventana, width=2, height=1, bg=color, relief=tk.SUNKEN, borderwidth=1)
             lbl_celda.grid(row=i, column=j)

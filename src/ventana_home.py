@@ -64,9 +64,9 @@ def crear_home():
 	# Variable que almacena la opcion seleccionada por el radiobutton del laberinto, así como las opciones del mismo y su posición en el grid
 	laberinto_seleccionado = tk.IntVar()
 	radio_mapa = tk.Radiobutton(ventana, text="Pequeño",font=("Arial", 14), value=1, variable=laberinto_seleccionado).grid(row = 2, column = 0,sticky = "W", padx = padding_x_radio)
-	radio_mapa = tk.Radiobutton(ventana, text="Mediano",font=("Arial", 14), value=2, variable=laberinto_seleccionado).grid(row = 3, column = 0,sticky = "W", padx = padding_x_radio)
+	radio_mapa = tk.Radiobutton(ventana, text="Mediano (Roberto)",font=("Arial", 14), value=2, variable=laberinto_seleccionado).grid(row = 3, column = 0,sticky = "W", padx = padding_x_radio)
 	radio_mapa = tk.Radiobutton(ventana, text="Grande",font=("Arial", 14), value=3, variable=laberinto_seleccionado).grid(row = 4, column = 0,sticky = "W", padx = padding_x_radio)
-	radio_mapa = tk.Radiobutton(ventana, text="Custom",font=("Arial", 14), value=4, variable=laberinto_seleccionado).grid(row = 5, column = 0,sticky = "W", padx = padding_x_radio)
+	radio_mapa = tk.Radiobutton(ventana, text="Custom (sin salida)",font=("Arial", 14), value=4, variable=laberinto_seleccionado).grid(row = 5, column = 0,sticky = "W", padx = padding_x_radio)
 
 	# Variable que almacena la opcion seleccionada por el radiobutton del algoritmo, así como las opciones del mismo y su posición en el grid
 	algoritmo_seleccionado = tk.IntVar()

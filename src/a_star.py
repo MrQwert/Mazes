@@ -11,6 +11,7 @@ import tkinter as tk
 from tkinter import messagebox
 import sys
 from queue import PriorityQueue
+from src.heuristicas import *
 
 
 CON_COSTES = True  # Se establece si al algoritmo implementado trabajará con coste uniforme o no.
@@ -40,10 +41,11 @@ class A_Star:
         imprime_laberinto(): Imprime el laberinto en la consola.
     """
 
-    def __init__(self, laberinto):  # Constructor de la clase Avara
+    def __init__(self, laberinto, heuristica):  # Constructor de la clase Avara
         self.abierto = PriorityQueue()
         self.cerrado = []
         self.todos = {}
+        self.heuristica = heuristica
         self.laberinto = laberinto
         self.operadores = ['arriba', 'abajo', 'izquierda', 'derecha']
         self.operaciones = {
@@ -76,9 +78,14 @@ class A_Star:
         return '$', '$'
 
     def calcular_prioridad(self, estado, coste):
-        # Función para calcular la prioridad (coste + distancia de Manhattan) de un estado
-        h_manhattan = abs(self.estado_final[0] - estado[0]) + abs(self.estado_final[1] - estado[1])
-        return h_manhattan + coste
+        if self.heuristica == "Manhattan":
+            resultado = calcular_manhattan(self, estado)
+        elif self.heuristica == "Chebyshev":
+            resultado = calcular_chebyshev(self, estado)
+        elif self.heuristica == "Euclidea":
+            resultado = calcular_euclidea(self, estado)
+
+        return resultado + coste
 
     def abrir_estado(self, coste):
         # Función para generar estados vecinos y agregarlos a la cola de prioridad

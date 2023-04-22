@@ -15,7 +15,7 @@ from src import *
 ## -----------------Comienza el programa-----------------
 
 ## Diccionarios con las distintas opciones que puede devolver el usuario cuando la ventana "home" finaliza
-dic_seleccion_laberinto = dict({1:"maze_pequenio.txt",2:"maze_mediano.txt",3:"maze_grande.txt",4:"maze_custom.txt"})
+dic_seleccion_laberinto = dict({1:"maze_pequenio.txt",2:"laberinto_roberto.txt",3:"maze_grande.txt",4:"maze_custom.txt"})
 
 dic_seleccion_algoritmo = dict({1:"Anchura",2:"Profundidad",3:"A*",4:"Avara",5:"CosteMin",6:"MiniMax"})
 
@@ -30,43 +30,47 @@ dic_seleccion_velocidad = dict({1:350,2:50,3:10})
 while (True):
     tipo_laberinto, algoritmo_busqueda, tipo_heuristica, velocidad_impresion = crear_home()
 
-    ## Prints temporales para comprobar que hemos recogido correctamente las elecciones introducidas por el usuario
+    ## Prints para comprobar que hemos recogido correctamente las elecciones introducidas por el usuario
     print("\nDatos recibidos de la ventana home:")
     print("tipo_laberinto = "+dic_seleccion_laberinto[tipo_laberinto])
     print("algoritmo_busqueda = "+dic_seleccion_algoritmo[algoritmo_busqueda])
     print("tipo_heuristica = "+dic_seleccion_heuristica[tipo_heuristica])
     print("velocidad_impresion = "+str(dic_seleccion_velocidad[velocidad_impresion])+"\n")
 
-    ## Se lee el fichero seleccionado y se almacena en la variable laberinto.
-    with open("Laberintos/"+dic_seleccion_laberinto[tipo_laberinto],'r') as f:
-        laberinto = f.read().split('\n')
 
-    ## Seleccionamos el algoritmo que haya indicado el usuario
-    ## (FALTA MINIMAX)
-    if(dic_seleccion_algoritmo[algoritmo_busqueda] == "Anchura"):
-        algoritmo = Anchura(laberinto) 
-        tiene_tupla = True
-    elif(dic_seleccion_algoritmo[algoritmo_busqueda] == "Profundidad"):
-        algoritmo = Profundidad(laberinto)
-        tiene_tupla = True
-    elif(dic_seleccion_algoritmo[algoritmo_busqueda] == "A*"):
-        algoritmo = A_Star(laberinto)
-        tiene_tupla = False
-    elif(dic_seleccion_algoritmo[algoritmo_busqueda] == "Avara"):
-        algoritmo = Avara(laberinto)
-        tiene_tupla = False
-    elif(dic_seleccion_algoritmo[algoritmo_busqueda] == "CosteMin"):
-        algoritmo = Coste_Min(laberinto)
-        tiene_tupla = False
-    elif(dic_seleccion_algoritmo[algoritmo_busqueda] == "MiniMax"):
-        algoritmo = A_Star(laberinto)
-        tiene_tupla = False
+    if(dic_seleccion_algoritmo[algoritmo_busqueda] == "MiniMax"):
+        ## Ejecutamos al minimax por terminal
+        main_minimax()
+
     else:
-        algoritmo = Anchura(laberinto) 
+        with open("Laberintos/"+dic_seleccion_laberinto[tipo_laberinto],'r') as f:
+            laberinto = f.read().split('\n')
 
-    ## Resolvemos el laberinto
-    resolver_mapa_algoritmo(dic_seleccion_velocidad[velocidad_impresion], laberinto,algoritmo,tiene_tupla)
-    
-    ## Borrar de memoria restos
-    del(algoritmo)
-    gc.collect()
+        ## Seleccionamos el algoritmo que haya indicado el usuario
+        ## (FALTA MINIMAX)
+        if(dic_seleccion_algoritmo[algoritmo_busqueda] == "Anchura"):
+            algoritmo = Anchura(laberinto)
+            tiene_tupla = True
+        elif(dic_seleccion_algoritmo[algoritmo_busqueda] == "Profundidad"):
+            algoritmo = Profundidad(laberinto)
+            tiene_tupla = True
+        elif(dic_seleccion_algoritmo[algoritmo_busqueda] == "A*"):
+            ## Este algoritmo hace uso de la heurística seleccionada por el usuario
+            algoritmo = A_Star(laberinto,dic_seleccion_heuristica[tipo_heuristica])
+            tiene_tupla = False
+        elif(dic_seleccion_algoritmo[algoritmo_busqueda] == "Avara"):
+            ## Este algoritmo hace uso de la heurística seleccionada por el usuario
+            algoritmo = Avara(laberinto,dic_seleccion_heuristica[tipo_heuristica])
+            tiene_tupla = False
+        elif(dic_seleccion_algoritmo[algoritmo_busqueda] == "CosteMin"):
+            algoritmo = Coste_Min(laberinto)
+            tiene_tupla = False
+
+
+        ## Resolvemos el laberinto
+        resolver_mapa_algoritmo(dic_seleccion_velocidad[velocidad_impresion], laberinto,algoritmo,tiene_tupla)
+
+        ## Borrar de memoria restos
+        del(algoritmo)
+        del(laberinto)
+        gc.collect()

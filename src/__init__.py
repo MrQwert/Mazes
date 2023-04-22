@@ -7,3 +7,4 @@ from .avara import *
 from .coste_min import *
 from .minimax import *
 from .impresion_laberinto import *
+from .heuristicas import *

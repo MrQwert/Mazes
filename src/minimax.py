@@ -38,7 +38,7 @@ class Minimax:
     }
 
     def __init__(self):
-        maze = 'maze_adv.txt'
+        maze = "Laberintos/laberinto_premios.txt"
         # Se lee el fichero seleccionado y se almacena en la variable laberinto.
         with open(maze, 'r') as f:
             l = f.read().split('\n')
@@ -175,7 +175,7 @@ def minmax_alphabeta(laberinto, estado_inicial):
 
     def valor_max(_estado, alpha, beta, d):
         print(_estado)
-        sleep(0.5)
+        sleep(0.15)
         if laberinto.es_terminal(_estado):
             return laberinto.utilidad(_estado, _jugador), None
         v, movimiento = -infinito, None
@@ -192,7 +192,7 @@ def minmax_alphabeta(laberinto, estado_inicial):
 
     def valor_min(_estado, alpha, beta, d):
         print(_estado)
-        sleep(0.5)
+        sleep(0.15)
         if laberinto.es_terminal(_estado):
             return laberinto.utilidad(_estado, _jugador), None
         v, move = +infinito, None
@@ -227,7 +227,7 @@ def jugar(competicion, strategies: dict, verbose=False):
     return estado
 
 
-def main():
+def main_minimax():
     competicion_laberinto = Minimax()
 
     estado = jugar(competicion=competicion_laberinto,
@@ -242,4 +242,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main_minimax()
