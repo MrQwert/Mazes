@@ -1,4 +1,4 @@
-# BASADA EN LA IMPLEMENTACIÓN DEL TRES EN RALLA (TIC-TAC-TOE) DE:
+# BASADA EN LA IMPLEMENTACIÓN DEL TRES EN RAYA (TIC-TAC-TOE) DE:
 # Russell, S., & Norvig, P. (2010). Artificial Intelligence A Modern Approach Third Edition.
 # In Pearson. https://doi.org/10.1017/S0269888900007724
 
