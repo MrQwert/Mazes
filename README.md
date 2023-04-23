@@ -14,6 +14,10 @@ para encontrar rutas óptimas en entornos complejos.
 - A* (con/sin costes)
 - Minimax
 
+## WARNING!!!
+El algoritmo Minimax, por su naturaleza y complejidad, tarda una cantidad de tiempo excesiva en concluirse, por lo que se recomienda que sea el último
+algoritmo en ejecutarse, de lo contrario habrá que realizar una parada manual del programa, "Control + c" en la terminal, y reiniciar el programa, "python3 main.py".
+
 ## Demo
 
 En el [siguiente enlace](http://132.145.141.5:10081/vnc/noVNC-1.3.0/vnc.html?path=wsvnc?token=display10&autoconnect=true&resize=remote&bell=off&password=headless) se puede probar el software en un servidor virtual.
